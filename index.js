@@ -49,6 +49,30 @@ async function run() {
       res.send(result);
     });
 
+    app.put('/Place/:id',async(req,res)=>{
+        const id =req.params.id;
+        const filter ={_id: new ObjectId(id)}
+        const options ={upsert: true};
+        const UpdatedPlace =req.body;
+        const Place={
+            $set: {
+                country: UpdatedPlace.country
+                ,image: UpdatedPlace.image
+                ,sportName: UpdatedPlace.sportName
+                ,location: UpdatedPlace.location
+                ,shortDescription: UpdatedPlace.shortDescription
+                ,averageCost: UpdatedPlace.averageCost
+                ,seasonality: UpdatedPlace.seasonality
+                ,travelTime: UpdatedPlace.travelTime
+                ,totalVisitorsPerYear: UpdatedPlace.totalVisitorsPerYear
+                ,UserEmail: UpdatedPlace.UserEmail
+                ,UserName:UpdatedPlace.UserName 
+            }
+        }
+        const result = await placeCollection.updateOne(filter,Place,options);
+        res.send(result);
+    })
+
 
     app.delete('/Place/:id',async(req,res)=>{
         const id =req.params.id;
