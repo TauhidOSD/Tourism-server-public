@@ -24,9 +24,17 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const placeCollection = client.db("placeDB").collection("Place");
+    const countryCollection= client.db("placeDB").collection("Country");
+
+    app.get('/Country',async(req,res)=>{
+        const cursor = countryCollection.find();
+        const result=await cursor.toArray();
+        res.send(result);
+    })
+
 
     app.get("/Place", async (req, res) => {
       const cursor = placeCollection.find();
