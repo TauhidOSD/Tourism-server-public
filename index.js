@@ -57,6 +57,14 @@ async function run() {
       res.send(result);
     });
 
+
+    app.get("/Place/:UserEmail",async(req,res) =>{
+        console.log(req.params.UserEmail);
+        const result = await placeCollection.find({UserEmail:req.params.UserEmail}).toArray();
+        res.send(result);
+        
+    })
+
     app.put('/Place/:id',async(req,res)=>{
         const id =req.params.id;
         const filter ={_id: new ObjectId(id)}
