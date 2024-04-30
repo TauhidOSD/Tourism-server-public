@@ -58,7 +58,7 @@ async function run() {
     });
 
 
-    app.get("/Place/:UserEmail",async(req,res) =>{
+    app.get("/Placebyemail/:UserEmail",async(req,res) =>{
         console.log(req.params.UserEmail);
         const result = await placeCollection.find({UserEmail:req.params.UserEmail}).toArray();
         res.send(result);
